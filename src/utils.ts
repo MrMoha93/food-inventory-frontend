@@ -1,4 +1,7 @@
-function range(startNumber: number, endNumber: number): number[] {
+export default function range(
+  startNumber: number,
+  endNumber: number
+): number[] {
   let array: number[] = [];
 
   for (let count = startNumber; count <= endNumber; count++) {
@@ -8,4 +11,13 @@ function range(startNumber: number, endNumber: number): number[] {
   return array;
 }
 
-export default range;
+export function paginate<T>(
+  items: T[],
+  pageSize: number,
+  selectedPage: number
+) {
+  const startIndex = pageSize * (selectedPage - 1);
+  const endIndex = pageSize * selectedPage;
+
+  return items.slice(startIndex, endIndex);
+}
