@@ -7,14 +7,20 @@ import ListGroup from "./ListGroup";
 import { Category, getCategories } from "../services/fakeCategoryService";
 import { paginate } from "../utils";
 
+interface SortColumn {
+  path: string;
+  order: "asc" | "desc";
+}
+
 const DEFAULT_CATEGORY: Category = { _id: "", name: "All Categories" };
+const DEFAULT_SORT_COLUMN: SortColumn = { path: "name", order: "asc" };
 const PAGE_SIZE = 4;
 
 function Foods() {
   const [foods, setFoods] = useState(getFoods());
   const [selectedPage, setSelectedPage] = useState(1);
   const [selectedCategory, setSelectedCategory] = useState(DEFAULT_CATEGORY);
-  const [sortColumn, setSortColumn] = useState("name");
+  const [sortColumn, setSortColumn] = useState(DEFAULT_SORT_COLUMN);
 
   function handleDelete(id: string) {
     const newFoods = foods.filter((food) => food._id !== id);
@@ -36,13 +42,27 @@ function Foods() {
     setSelectedPage(1);
   }
 
+  function handleSort(path: string) {
+    if (path === sortColumn.path) {
+      sortColumn.order = sortColumn.order === "asc" ? "desc" : "asc";
+    } else {
+      sortColumn.path = path;
+      sortColumn.order = "asc";
+    }
+    setSortColumn({ ...sortColumn });
+  }
+
   if (foods.length === 0) return <p>There are no foods in the database</p>;
 
   const filteredFoods = selectedCategory._id
     ? foods.filter((food) => food.category._id === selectedCategory._id)
     : foods;
 
-  const sortedFoods = _.orderBy(filteredFoods, sortColumn, "asc");
+  const sortedFoods = _.orderBy(
+    filteredFoods,
+    sortColumn.path,
+    sortColumn.order
+  );
 
   const paginatedFoods = paginate(sortedFoods, PAGE_SIZE, selectedPage);
 
@@ -60,16 +80,16 @@ function Foods() {
         <table className="table">
           <thead>
             <tr>
-              <th scope="col" onClick={() => setSortColumn("name")}>
+              <th scope="col" onClick={() => handleSort("name")}>
                 Name
               </th>
-              <th scope="col" onClick={() => setSortColumn("category.name")}>
+              <th scope="col" onClick={() => handleSort("category.name")}>
                 Category
               </th>
-              <th scope="col" onClick={() => setSortColumn("price")}>
+              <th scope="col" onClick={() => handleSort("price")}>
                 Price
               </th>
-              <th scope="col" onClick={() => setSortColumn("numberInStock")}>
+              <th scope="col" onClick={() => handleSort("numberInStock")}>
                 Stock
               </th>
               <th />
