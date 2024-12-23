@@ -4,8 +4,10 @@ import Favorite from "./Favorite";
 import Pagination from "./Pagination";
 import ListGroup from "./ListGroup";
 import { Category, getCategories } from "../services/fakeCategoryService";
+import { paginate } from "../utils";
 
 const DEFAULT_CATEGORY: Category = { _id: "", name: "All Categories" };
+const PAGE_SIZE = 4;
 
 function Foods() {
   const [foods, setFoods] = useState(getFoods());
@@ -28,6 +30,8 @@ function Foods() {
   }
 
   if (foods.length === 0) return <p>There are no foods in the database</p>;
+
+  const paginatedFoods = paginate(foods, PAGE_SIZE, selectedPage);
 
   return (
     <div className="row container">
@@ -52,7 +56,7 @@ function Foods() {
             </tr>
           </thead>
           <tbody>
-            {foods.map((food) => (
+            {paginatedFoods.map((food) => (
               <tr key={food._id}>
                 <td>{food.name}</td>
                 <td>{food.category.name}</td>
@@ -78,7 +82,7 @@ function Foods() {
         </table>
         <Pagination
           totalCount={foods.length}
-          pageSize={4}
+          pageSize={PAGE_SIZE}
           selectedPage={selectedPage}
           onPageSelect={setSelectedPage}
         />
