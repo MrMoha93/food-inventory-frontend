@@ -1,6 +1,6 @@
 import { Category, getCategories } from "./fakeCategoryService";
 
-interface Food {
+export interface Food {
   _id: string;
   name: string;
   category: Category;

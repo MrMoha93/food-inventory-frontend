@@ -1,11 +1,11 @@
 import { useState } from "react";
 import _ from "lodash";
 import { getFoods } from "../services/fakeFoodService";
-import Favorite from "./Favorite";
 import Pagination from "./Pagination";
 import ListGroup from "./ListGroup";
 import { Category, getCategories } from "../services/fakeCategoryService";
 import { paginate } from "../utils";
+import FoodsTable from "./Foodstable";
 
 interface SortColumn {
   path: string;
@@ -77,50 +77,12 @@ function Foods() {
       </div>
       <div className="col">
         <p>Showing {filteredFoods.length} foods in the database</p>
-        <table className="table">
-          <thead>
-            <tr>
-              <th scope="col" onClick={() => handleSort("name")}>
-                Name
-              </th>
-              <th scope="col" onClick={() => handleSort("category.name")}>
-                Category
-              </th>
-              <th scope="col" onClick={() => handleSort("price")}>
-                Price
-              </th>
-              <th scope="col" onClick={() => handleSort("numberInStock")}>
-                Stock
-              </th>
-              <th />
-              <th />
-            </tr>
-          </thead>
-          <tbody>
-            {paginatedFoods.map((food) => (
-              <tr key={food._id}>
-                <td>{food.name}</td>
-                <td>{food.category.name}</td>
-                <td>{food.price}</td>
-                <td>{food.numberInStock}</td>
-                <td>
-                  <Favorite
-                    isFavored={Boolean(food.isFavored)}
-                    onFavor={() => handleFavor(food._id)}
-                  />
-                </td>
-                <td>
-                  <button
-                    className="btn btn-danger"
-                    onClick={() => handleDelete(food._id)}
-                  >
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <FoodsTable
+          foods={paginatedFoods}
+          onSort={handleSort}
+          onDelete={handleDelete}
+          onFavor={handleFavor}
+        />
         <Pagination
           totalCount={filteredFoods.length}
           pageSize={PAGE_SIZE}
