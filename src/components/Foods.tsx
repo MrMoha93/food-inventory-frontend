@@ -5,12 +5,7 @@ import Pagination from "./Pagination";
 import ListGroup from "./ListGroup";
 import { Category, getCategories } from "../services/fakeCategoryService";
 import { paginate } from "../utils";
-import FoodsTable from "./Foodstable";
-
-interface SortColumn {
-  path: string;
-  order: "asc" | "desc";
-}
+import FoodsTable, { SortColumn } from "./FoodsTable";
 
 const DEFAULT_CATEGORY: Category = { _id: "", name: "All Categories" };
 const DEFAULT_SORT_COLUMN: SortColumn = { path: "name", order: "asc" };
@@ -42,16 +37,6 @@ function Foods() {
     setSelectedPage(1);
   }
 
-  function handleSort(path: string) {
-    if (path === sortColumn.path) {
-      sortColumn.order = sortColumn.order === "asc" ? "desc" : "asc";
-    } else {
-      sortColumn.path = path;
-      sortColumn.order = "asc";
-    }
-    setSortColumn({ ...sortColumn });
-  }
-
   if (foods.length === 0) return <p>There are no foods in the database</p>;
 
   const filteredFoods = selectedCategory._id
@@ -79,7 +64,8 @@ function Foods() {
         <p>Showing {filteredFoods.length} foods in the database</p>
         <FoodsTable
           foods={paginatedFoods}
-          onSort={handleSort}
+          sortColumn={sortColumn}
+          onSort={setSortColumn}
           onDelete={handleDelete}
           onFavor={handleFavor}
         />
