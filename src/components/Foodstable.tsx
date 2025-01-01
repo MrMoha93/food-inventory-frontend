@@ -21,7 +21,7 @@ function FoodsTable({ foods, sortColumn, onSort, onDelete, onFavor }: Props) {
     { path: "name", label: "Name" },
     { path: "category.name", label: "Category" },
     { path: "price", label: "Price" },
-    { path: "numberInStock", label: "Name" },
+    { path: "numberInStock", label: "Stock" },
     {
       key: "favorite",
       content: (food) => (
