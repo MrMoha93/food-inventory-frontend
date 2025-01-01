@@ -1,16 +1,16 @@
 import _ from "lodash";
 import { Column } from "./TableHeader";
 
-type WithId<T> = T & { _id: string };
-
-interface Props<T> {
-  items: WithId<T>[];
-  columns: Column<T>[];
-  onDelete(path: string): void;
-  onFavor(path: string): void;
+export interface Id {
+  _id: string;
 }
 
-function TableBody<T>({ items, columns }: Props<T>) {
+interface Props<T extends Id> {
+  items: T[];
+  columns: Column<T>[];
+}
+
+function TableBody<T extends Id>({ items, columns }: Props<T>) {
   return (
     <tbody>
       {items.map((item) => (
