@@ -1,7 +1,6 @@
-import {} from "../services/fakeFoodService";
-import { Column, Food, SortColumn } from "../Types";
-import Favorite from "./Favorite";
-import Table from "./Table";
+import { Column, Food, SortColumn } from "../types";
+import Favorite from "./common/Favorite";
+import Table from "./common/Table";
 
 interface Props {
   foods: Food[];

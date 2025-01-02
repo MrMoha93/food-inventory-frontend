@@ -1,4 +1,4 @@
-import { Food } from "../Types";
+import { Food } from "../types";
 import { getCategories } from "./fakeCategoryService";
 
 interface FoodFormData {

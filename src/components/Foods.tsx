@@ -1,12 +1,12 @@
 import { useState } from "react";
 import _ from "lodash";
 import { getFoods } from "../services/fakeFoodService";
-import Pagination from "./Pagination";
-import ListGroup from "./ListGroup";
-import { Category, getCategories } from "../services/fakeCategoryService";
+import Pagination from "./common/Pagination";
+import ListGroup from "./common/ListGroup";
+import { getCategories } from "../services/fakeCategoryService";
 import { paginate } from "../utils";
-import FoodsTable from "./FoodsTable";
-import { SortColumn } from "../Types";
+import FoodsTable from "./Foodstable";
+import { Category, SortColumn } from "../types";
 
 const DEFAULT_CATEGORY: Category = { _id: "", name: "All Categories" };
 const DEFAULT_SORT_COLUMN: SortColumn = { path: "name", order: "asc" };
