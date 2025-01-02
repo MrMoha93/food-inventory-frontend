@@ -1,6 +1,6 @@
-import { SortColumn } from "./FoodsTable";
-import TableBody, { Id } from "./TableBody";
-import TableHeader, { Column } from "./TableHeader";
+import { Column, Id, SortColumn } from "../Types";
+import TableBody from "./TableBody";
+import TableHeader from "./TableHeader";
 
 interface Props<T extends Id> {
   items: T[];

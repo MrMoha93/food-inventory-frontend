@@ -1,22 +1,10 @@
-import { SortColumn } from "./FoodsTable";
+import { Column, SortColumn, TextColumn } from "../Types";
 
 interface Props<T> {
   columns: Column<T>[];
   sortColumn: SortColumn;
   onSort(sortColumn: SortColumn): void;
 }
-
-interface TextColumn {
-  path: string;
-  label: string;
-}
-
-interface ContentColumn<T> {
-  key: string;
-  content(item: T): JSX.Element;
-}
-
-export type Column<T> = TextColumn | ContentColumn<T>;
 
 function TableHeader<T>({ onSort, sortColumn, columns }: Props<T>) {
   function handleSort(path: string) {

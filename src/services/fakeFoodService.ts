@@ -1,13 +1,5 @@
-import { Category, getCategories } from "./fakeCategoryService";
-
-export interface Food {
-  _id: string;
-  name: string;
-  category: Category;
-  numberInStock: number;
-  price: number;
-  isFavored?: boolean;
-}
+import { Food } from "../Types";
+import { getCategories } from "./fakeCategoryService";
 
 interface FoodFormData {
   _id?: string;
