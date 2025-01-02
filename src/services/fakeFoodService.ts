@@ -1,5 +1,5 @@
-import { Food } from "../types";
-import { getCategories } from "./fakeCategoryService";
+import { Food } from "@/types";
+import { getCategories } from "@services/fakeCategoryService";
 
 interface FoodFormData {
   _id?: string;
