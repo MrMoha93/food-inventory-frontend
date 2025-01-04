@@ -1,8 +1,8 @@
-import { Foods } from "@components";
+import { FoodsPage } from "@components/pages";
 import "./App.css";
 
 function App() {
-  return <Foods />;
+  return <FoodsPage />;
 }
 
 export default App;

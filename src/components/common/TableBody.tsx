@@ -6,6 +6,7 @@ interface Props<T extends Id> {
   columns: Column<T>[];
 }
 
+//(map i map) loopa uppifrån och ner och för varje rad loopa vänster till höger.
 function TableBody<T extends Id>({ items, columns }: Props<T>) {
   return (
     <tbody>
