@@ -12,11 +12,13 @@ function TableBody<T extends Id>({ items, columns }: Props<T>) {
     <tbody>
       {items.map((item) => (
         <tr key={item._id}>
-          {columns.map((column) =>
-            "path" in column ? (
-              <td key={column.path}>{_.get(item, column.path)}</td>
+          {columns.map((column, index) =>
+            "content" in column ? (
+              <td key={`${item._id}-${index}`}>{column.content(item)}</td>
             ) : (
-              <td key={column.key}>{column.content(item)} </td>
+              <td key={`${item._id}-${column.path}`}>
+                {_.get(item, column.path)}
+              </td>
             )
           )}
         </tr>
