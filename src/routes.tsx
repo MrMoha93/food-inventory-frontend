@@ -5,6 +5,7 @@ import {
   NotFoundPage,
   OrdersPage,
   FoodFormPage,
+  LoginPage,
 } from "@components/pages";
 import { createBrowserRouter } from "react-router-dom";
 
@@ -21,6 +22,7 @@ const router = createBrowserRouter([
       { path: "/orders", element: <OrdersPage /> },
     ],
   },
+  { path: "/login", element: <LoginPage /> },
 ]);
 
 export default router;
