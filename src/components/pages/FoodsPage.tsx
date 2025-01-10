@@ -2,7 +2,7 @@ import { useState } from "react";
 import _ from "lodash";
 import { paginate } from "@utils";
 import { Category, SortColumn } from "@types";
-import { ListGroup, Pagination } from "@components/common";
+import { ListGroup, Pagination, SearchBox } from "@components/common";
 import { getCategories, getFoods } from "@services";
 import { FoodsTable } from "@components";
 
@@ -11,6 +11,8 @@ const DEFAULT_SORT_COLUMN: SortColumn = { path: "name", order: "asc" };
 const PAGE_SIZE = 4;
 
 function FoodsPage() {
+  const [searchQuerry, setSearchQuery] = useState("");
+
   const [foods, setFoods] = useState(getFoods());
   const [selectedPage, setSelectedPage] = useState(1);
   const [selectedCategory, setSelectedCategory] = useState(DEFAULT_CATEGORY);
@@ -33,14 +35,28 @@ function FoodsPage() {
 
   function handleCategorySelect(category: Category) {
     setSelectedCategory(category);
+    setSearchQuery("");
     setSelectedPage(1);
+  }
+
+  function handleSearch(value: string) {
+    setSearchQuery(value);
+    setSelectedCategory(DEFAULT_CATEGORY);
   }
 
   if (foods.length === 0) return <p>There are no foods in the database</p>;
 
-  const filteredFoods = selectedCategory._id
-    ? foods.filter((food) => food.category._id === selectedCategory._id)
-    : foods;
+  let filteredFoods = foods;
+
+  if (searchQuerry) {
+    filteredFoods = foods.filter((food) =>
+      food.name.toLowerCase().includes(searchQuerry.toLocaleLowerCase())
+    );
+  } else if (selectedCategory._id) {
+    filteredFoods = foods.filter(
+      (food) => food.category._id === selectedCategory._id
+    );
+  }
 
   const sortedFoods = _.orderBy(
     filteredFoods,
@@ -61,6 +77,7 @@ function FoodsPage() {
       </div>
       <div className="col">
         <p>Showing {filteredFoods.length} foods in the database</p>
+        <SearchBox value={searchQuerry} onChange={handleSearch} />
         <FoodsTable
           foods={paginatedFoods}
           sortColumn={sortColumn}
