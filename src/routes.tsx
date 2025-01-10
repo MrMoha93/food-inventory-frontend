@@ -7,6 +7,7 @@ import {
   FoodFormPage,
   LoginPage,
 } from "@components/pages";
+import RegisterPage from "@components/pages/RegisterPage";
 import { createBrowserRouter } from "react-router-dom";
 
 const router = createBrowserRouter([
@@ -23,6 +24,7 @@ const router = createBrowserRouter([
     ],
   },
   { path: "/login", element: <LoginPage /> },
+  { path: "/register", element: <RegisterPage /> },
 ]);
 
 export default router;
