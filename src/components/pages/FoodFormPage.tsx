@@ -2,10 +2,12 @@ import { useNavigate, useParams } from "react-router";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { getCategories, saveFood } from "@services";
+import { getCategories, getFood, saveFood } from "@services";
+import { useEffect, useState } from "react";
+import { Category, Food } from "@types";
 
 const schema = z.object({
-  // id: z.string(),
+  id: z.string().optional(),
   name: z.string().min(1, { message: "Name is required" }),
   categoryId: z.string().min(1, { message: "You must select a category" }),
   numberInStock: z
@@ -22,10 +24,10 @@ type FormData = z.infer<typeof schema>;
 
 function FoodFormPage() {
   const { id } = useParams();
-
+  const [categories, setCategories] = useState<Category[]>([]);
   const navigate = useNavigate();
   const {
-    //reset,
+    reset,
     register,
     handleSubmit,
     formState: { errors, isValid },
@@ -34,9 +36,35 @@ function FoodFormPage() {
     mode: "onChange",
   });
 
-  function onSubmit(data: FormData) {
+  useEffect(() => {
+    async function fetch() {
+      const { data: categories } = await getCategories();
+      setCategories(categories);
+
+      if (!id || id === "new") return;
+
+      const { data: food } = await getFood(id);
+
+      if (!food) return;
+
+      reset(mapToFormData(food));
+    }
+    fetch();
+  }, []);
+
+  function mapToFormData(food: Food): FormData {
+    return {
+      id: food.id || "",
+      name: food.name,
+      categoryId: food.category.id,
+      numberInStock: food.numberInStock,
+      price: food.price,
+    };
+  }
+
+  async function onSubmit(data: FormData) {
     console.log("data", data);
-    saveFood(data);
+    await saveFood(data);
     navigate("/foods");
   }
 
@@ -55,8 +83,8 @@ function FoodFormPage() {
           <label className="form-label">Category</label>
           <select {...register("categoryId")} className="form-select">
             <option />
-            {getCategories().map((category) => (
-              <option key={category._id} value={category._id}>
+            {categories.map((category) => (
+              <option key={category.id} value={category.id}>
                 {category.name}
               </option>
             ))}
@@ -83,8 +111,7 @@ function FoodFormPage() {
           )}
         </div>
         <button className="btn btn-primary" disabled={!isValid}>
-          {" "}
-          Save{" "}
+          Save
         </button>
       </form>
     </div>

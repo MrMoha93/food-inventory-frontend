@@ -1,5 +1,5 @@
 interface Item {
-  _id: string;
+  id: string;
   name: string;
 }
 
@@ -23,10 +23,10 @@ function ListGroup<T extends Item>({
     <ul className="list-group ">
       {items.map((item) => (
         <li
-          key={item._id}
+          key={item.id}
           onClick={() => onItemSelect(item)}
           className={`list-group-item ${
-            item._id === selectedItem._id ? "active" : ""
+            item.id === selectedItem.id ? "active" : ""
           }`}
         >
           {item.name}

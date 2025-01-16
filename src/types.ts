@@ -1,5 +1,5 @@
 export interface Food {
-  _id: string;
+  id: string;
   name: string;
   category: Category;
   numberInStock: number;
@@ -8,7 +8,7 @@ export interface Food {
 }
 
 export interface Category {
-  _id: string;
+  id: string;
   name: string;
 }
 
@@ -18,7 +18,7 @@ export interface SortColumn {
 }
 
 export interface Id {
-  _id: string;
+  id: string;
 }
 
 export interface TextColumn {
