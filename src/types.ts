@@ -7,6 +7,12 @@ export interface Food {
   isFavored?: boolean;
 }
 
+export interface User {
+  name: string;
+  username: string;
+  password: string;
+}
+
 export interface Category {
   id: string;
   name: string;

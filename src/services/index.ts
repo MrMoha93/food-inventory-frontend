@@ -1,2 +1,3 @@
 export { getCategories } from "./categoryService";
 export { deleteFood, getFood, getFoods, saveFood } from "./foodService";
+export { default as user } from "./userService";

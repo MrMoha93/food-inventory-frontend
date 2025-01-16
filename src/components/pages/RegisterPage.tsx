@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "react-router-dom";
+import { user } from "@services";
 
 const schema = z.object({
   name: z.string(),
@@ -25,11 +26,13 @@ function RegisterPage() {
     formState: { errors, isValid },
   } = useForm<FormData>({ resolver: zodResolver(schema), mode: "onChange" });
 
-  function onSubmit(data: FormData) {
+  async function onSubmit(data: FormData) {
     console.log("Submitted", data);
+
+    await user.register(data);
+
     navigate("/foods");
   }
-
   return (
     <div className="vh-100 d-grid justify-content-center align-content-center">
       <h1 className="mb-4 text-center">Register Page</h1>
