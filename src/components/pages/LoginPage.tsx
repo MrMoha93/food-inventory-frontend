@@ -23,14 +23,12 @@ function LoginPage() {
 
   async function onSubmit(data: FormData) {
     console.log("Submitted", data);
-
     try {
       await auth.login(data);
       navigate("/foods");
     } catch (error: any) {
       if (error.response.status === 400) {
         setError("username", { message: error.response.data });
-        console.log(error.response.data);
       }
     }
   }

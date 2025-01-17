@@ -7,7 +7,6 @@ const API_BASEURL = "http://localhost:5678/api/auth";
 const CREDENTIALS = "?username=mohammed&accessCode=qPwtoO";
 
 axios.defaults.headers.common["x-auth-token"] = getJwt();
-console.log(axios.defaults.headers.common["x-auth-token"]);
 
 async function login(user: UserLogin) {
   const { data: token } = await axios.post(API_BASEURL + CREDENTIALS, user);

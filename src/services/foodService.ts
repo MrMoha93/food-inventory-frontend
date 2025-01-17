@@ -10,7 +10,7 @@ interface FoodFormData {
 }
 
 const API_BASEURL = "https://server.intensivecode.se/api/foods";
-const CREDENTIALS = "?username=mohammed&accessCode=qPwtoO";
+const CREDENTIALS = "?username=mohammed&accessCode=qPwtoO&auth=true";
 
 function foodUrl(id?: string) {
   if (id) return `${API_BASEURL}/${id}${CREDENTIALS}`;
