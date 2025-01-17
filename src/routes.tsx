@@ -1,5 +1,4 @@
 import App from "@App";
-import Logout from "@components/Logout";
 import {
   CustomersPage,
   FoodsPage,
@@ -10,6 +9,7 @@ import {
 } from "@components/pages";
 import RegisterPage from "@components/pages/RegisterPage";
 import { createBrowserRouter } from "react-router-dom";
+import { Logout, ProtectedRoute } from "@components";
 
 const router = createBrowserRouter([
   {
@@ -17,16 +17,20 @@ const router = createBrowserRouter([
     element: <App />,
     errorElement: <NotFoundPage />,
     children: [
-      { index: true, element: <FoodsPage /> },
       { path: "/foods", element: <FoodsPage /> },
-      { path: "/foods/:id", element: <FoodFormPage /> },
-      { path: "/customers", element: <CustomersPage /> },
-      { path: "/orders", element: <OrdersPage /> },
+      {
+        element: <ProtectedRoute />,
+        children: [
+          { path: "/foods/:id", element: <FoodFormPage /> },
+          { path: "/customers", element: <CustomersPage /> },
+          { path: "/orders", element: <OrdersPage /> },
+        ],
+      },
     ],
   },
-  { path: "/logout", element: <Logout /> },
   { path: "/login", element: <LoginPage /> },
   { path: "/register", element: <RegisterPage /> },
+  { path: "/logout", element: <Logout /> },
 ]);
 
 export default router;
