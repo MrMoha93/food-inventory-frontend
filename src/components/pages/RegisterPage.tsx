@@ -21,17 +21,23 @@ type FormData = z.infer<typeof schema>;
 function RegisterPage() {
   const navigate = useNavigate();
   const {
+    setError,
     register,
     handleSubmit,
     formState: { errors, isValid },
   } = useForm<FormData>({ resolver: zodResolver(schema), mode: "onChange" });
 
   async function onSubmit(data: FormData) {
-    console.log("Submitted", data);
+    try {
+      await user.register(data);
 
-    await user.register(data);
-
-    navigate("/foods");
+      navigate("/foods");
+    } catch (error: any) {
+      if (error.response.status === 400) {
+        setError("username", { message: error.response.data });
+        console.log(error.response.data);
+      }
+    }
   }
   return (
     <div className="vh-100 d-grid justify-content-center align-content-center">
