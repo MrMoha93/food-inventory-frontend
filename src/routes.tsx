@@ -1,4 +1,5 @@
 import App from "@App";
+import Logout from "@components/Logout";
 import {
   CustomersPage,
   FoodsPage,
@@ -23,6 +24,7 @@ const router = createBrowserRouter([
       { path: "/orders", element: <OrdersPage /> },
     ],
   },
+  { path: "/logout", element: <Logout /> },
   { path: "/login", element: <LoginPage /> },
   { path: "/register", element: <RegisterPage /> },
 ]);
