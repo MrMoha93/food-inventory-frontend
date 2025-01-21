@@ -3,7 +3,8 @@ import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 
 const TOKEN_KEY = "token";
-const API_BASEURL = "https://server.intensivecode.se/api/auth";
+//const API_BASEURL = "https://server.intensivecode.se/api/auth";
+const API_BASEURL = "http://localhost:5589/api/auth";
 const CREDENTIALS = "?username=mohammed&accessCode=qPwtoO";
 
 axios.defaults.headers.common["x-auth-token"] = getJwt();
