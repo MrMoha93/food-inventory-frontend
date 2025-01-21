@@ -1,16 +1,16 @@
+import { BASE_URL } from "@config";
 import { User, UserLogin } from "@types";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 
 const TOKEN_KEY = "token";
-//const API_BASEURL = "https://server.intensivecode.se/api/auth";
-const API_BASEURL = "http://localhost:5589/api/auth";
+const API_ENDPOINT = `${BASE_URL}/api/auth`;
 const CREDENTIALS = "?username=mohammed&accessCode=qPwtoO";
 
 axios.defaults.headers.common["x-auth-token"] = getJwt();
 
 async function login(user: UserLogin) {
-  const { data: token } = await axios.post(API_BASEURL + CREDENTIALS, user);
+  const { data: token } = await axios.post(API_ENDPOINT + CREDENTIALS, user);
   localStorage.setItem(TOKEN_KEY, token);
   return token;
 }

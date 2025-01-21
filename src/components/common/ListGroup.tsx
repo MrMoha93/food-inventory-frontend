@@ -9,11 +9,6 @@ interface Props<T extends Item> {
   onItemSelect(category: T): void;
 }
 
-//Jämfört med andra reusable components som pagination så
-// behövde vi inte köra generics eftersom typerna är primitiva
-// Listgroup däremot kan behöva katerogirer, kunder, regioner och de typerna ser annorlunda ut.
-// Favorite kommer alltid vara en boolean och en funktion, kommer aldrig vara en number eller en kategori.
-
 function ListGroup<T extends Item>({
   items,
   selectedItem,

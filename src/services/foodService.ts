@@ -1,4 +1,5 @@
 import { Food } from "@/types";
+import { BASE_URL } from "@config";
 import axios from "axios";
 
 interface FoodFormData {
@@ -9,13 +10,12 @@ interface FoodFormData {
   price: number;
 }
 
-//const API_BASEURL = "https://server.intensivecode.se/api/foods";
-const API_BASEURL = "http://localhost:5589/api/foods";
-//const CREDENTIALS = "?username=mohammed&accessCode=qPwtoO&auth=true";
+const API_ENDPOINT = `${BASE_URL}/api/foods`;
+const CREDENTIALS = "?username=mohammed&accessCode=qPwtoO&auth=true";
 
 function foodUrl(id?: string) {
-  if (id) return `${API_BASEURL}/${id}`;
-  return `${API_BASEURL}`;
+  if (id) return `${API_ENDPOINT}/${id}${CREDENTIALS}`;
+  return `${API_ENDPOINT}${CREDENTIALS}`;
 }
 
 export function getFoods() {
