@@ -2,7 +2,8 @@ import { auth } from "@services";
 import { UserRegister } from "@types";
 import axios from "axios";
 
-const API_BASEURL = "https://server.intensivecode.se/api/users";
+//const API_BASEURL = "https://server.intensivecode.se/api/users";
+const API_BASEURL = "http://localhost:5589/api/users";
 const CREDENTIALS = "?username=mohammed&accessCode=qPwtoO";
 
 async function register(user: UserRegister) {
