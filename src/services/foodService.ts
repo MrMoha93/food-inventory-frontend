@@ -12,7 +12,6 @@ interface FoodFormData {
 }
 
 const API_ENDPOINT = `${BASE_URL}/api/foods`;
-//const CREDENTIALS = "?username=mohammed&accessCode=qPwtoO&auth=true";
 
 function foodUrl(id?: string) {
   if (id) return `${API_ENDPOINT}/${id}`;

@@ -5,7 +5,6 @@ import { jwtDecode } from "jwt-decode";
 
 const TOKEN_KEY = "token";
 const API_ENDPOINT = `${BASE_URL}/api/auth`;
-//const CREDENTIALS = "?username=mohammed&accessCode=qPwtoO";
 
 axios.defaults.headers.common["x-auth-token"] = getJwt();
 
