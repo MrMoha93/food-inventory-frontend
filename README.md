@@ -1,7 +1,9 @@
+## Features
+
 Foods Project - Frontend
 This project is a web application built with React, TypeScript, and Bootstrap, designed for managing food items and user authentication. The application includes a **category** list featuring **fruits**, **vegetables**, and **snacks**. **Users** can **create** and **edit** food items, while **deletion** is restricted to **administrators**. Features like a **search bar**, **sorting**, and **pagination** make it easy to navigate and manage the content. The application also supports **user registration** and **secure login** for accessing protected features.
 
-**Note**: Parts of the site, such as the **Customers** page and **Orders** page, are still under construction. As mentioned, the delete function is only available to the admin.
+**Note**: Parts of the site, such as the **Customers** page and **Orders** page, are still under construction.
 
 **Note:** To create and edit you first need to register an account on the site. Once you do, you will be **automatically logged in**. If you don’t register and click on one of the food items you will be **redirected to the login page.**
 
@@ -17,9 +19,22 @@ To update a food item, click on its **name**. Then make the desired changes and 
 ![Update Apple](https://github.com/user-attachments/assets/f59324a5-0ff4-4738-ba58-762d6df0b5d1)
 
 
+## Getting Started
+Note: To properly start the application you first need to clone, install and run the backend:[https://github.com/MrMoha93/food-inventory-backend](https://github.com/MrMoha93/food-inventory-backend)
+### 1. Clone the repository
 
+```bash
+git clone https://github.com/MrMoha93/food-inventory-frontend.git
+cd food-inventory-frontend
+```
 
-
-
+### 2. Install dependencies
+```bash
+npm install
+```
+### 3. Run server
+```bash
+npm run dev
+```
 
 
