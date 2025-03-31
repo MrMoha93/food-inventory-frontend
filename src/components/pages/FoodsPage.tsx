@@ -8,6 +8,7 @@ import { FoodsTable } from "@components";
 import { Link } from "react-router-dom";
 import { useDeleteFood, useGetFoods } from "@queries/foods";
 import { useGetCategories } from "@queries/categories";
+import { useCountdown } from "@hooks/useCountdown";
 
 const DEFAULT_CATEGORY: Category = { id: "", name: "All Categories" };
 const DEFAULT_SORT_COLUMN: SortColumn = { path: "name", order: "asc" };
@@ -16,11 +17,12 @@ const PAGE_SIZE = 4;
 function FoodsPage() {
   const [searchQuerry, setSearchQuery] = useState("");
   const { data: categories = [] } = useGetCategories();
-  const { data: foods = [] } = useGetFoods();
+  const { data: foods = [], isLoading } = useGetFoods();
   const { mutate: handleDelete } = useDeleteFood();
   const [selectedPage, setSelectedPage] = useState(1);
   const [selectedCategory, setSelectedCategory] = useState(DEFAULT_CATEGORY);
   const [sortColumn, setSortColumn] = useState(DEFAULT_SORT_COLUMN);
+  const countdown = useCountdown(30, isLoading);
   const user = auth.getCurrentUser();
 
   function handleFavor(id: string) {
@@ -43,6 +45,16 @@ function FoodsPage() {
     setSearchQuery(value);
     setSelectedCategory(DEFAULT_CATEGORY);
   }
+
+  if (isLoading)
+    return (
+      <div className="text-center mt-4">
+        <h1 className="text-[25px] font-semibold">Loading...</h1>
+        <p className="text-[16px] mt-2">
+          Please note, it may take up to {countdown} seconds to load the data.
+        </p>
+      </div>
+    );
 
   if (foods.length === 0) return <p>There are no foods in the database</p>;
 
