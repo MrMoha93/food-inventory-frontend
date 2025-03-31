@@ -22,7 +22,7 @@ function FoodsPage() {
   const [selectedPage, setSelectedPage] = useState(1);
   const [selectedCategory, setSelectedCategory] = useState(DEFAULT_CATEGORY);
   const [sortColumn, setSortColumn] = useState(DEFAULT_SORT_COLUMN);
-  const countdown = useCountdown(30, isLoading);
+  const countdown = useCountdown(60, isLoading);
   const user = auth.getCurrentUser();
 
   function handleFavor(id: string) {
@@ -51,7 +51,8 @@ function FoodsPage() {
       <div className="text-center mt-4">
         <h1 className="text-[25px] font-semibold">Loading...</h1>
         <p className="text-[16px] mt-2">
-          Please note, it may take up to {countdown} seconds to load the data.
+          Please note, it may take up to {countdown} seconds to load the data
+          due to Render's loading time.
         </p>
       </div>
     );
