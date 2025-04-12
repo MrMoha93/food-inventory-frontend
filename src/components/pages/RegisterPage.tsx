@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { user } from "@services";
 
 const schema = z.object({
@@ -78,6 +78,14 @@ function RegisterPage() {
             <button className="btn btn-primary" disabled={!isValid}>
               Register
             </button>
+          </div>
+          <div className="w-100 text-start mt-2">
+            <Link
+              to="/foods"
+              className="text-decoration-underline text-primary"
+            >
+              Return
+            </Link>
           </div>
         </form>
       </div>
