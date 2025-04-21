@@ -28,7 +28,6 @@ function RegisterPage() {
   } = useForm<FormData>({ resolver: zodResolver(schema), mode: "onChange" });
 
   async function onSubmit(data: FormData) {
-    console.log("Submitted", data);
     try {
       await user.register(data);
 

@@ -24,7 +24,6 @@ function LoginPage() {
   const user = auth.getCurrentUser();
 
   async function onSubmit(data: FormData) {
-    console.log("Submitted", data);
     try {
       await auth.login(data);
       navigate(fromUrl || "/foods");

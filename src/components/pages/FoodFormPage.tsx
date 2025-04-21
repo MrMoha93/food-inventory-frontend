@@ -80,8 +80,6 @@ function FoodFormPage() {
   }
 
   async function onSubmit({ images, ...data }: FormData) {
-    console.log("data", data);
-
     let imageUrl = food?.imageUrl || "";
 
     if (images && images.length > 0) {

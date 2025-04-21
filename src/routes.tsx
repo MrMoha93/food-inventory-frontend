@@ -1,5 +1,6 @@
 import App from "@App";
 import { Logout, ProtectedRoute } from "@components";
+import { createBrowserRouter } from "react-router-dom";
 import {
   CustomersPage,
   FoodsPage,
@@ -8,8 +9,8 @@ import {
   FoodFormPage,
   LoginPage,
 } from "@components/pages";
+import ProfilePage from "@components/pages/ProfilePage";
 import RegisterPage from "@components/pages/RegisterPage";
-import { createBrowserRouter } from "react-router-dom";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,7 @@ const router = createBrowserRouter([
       },
       { path: "/customers", element: <CustomersPage /> },
       { path: "/orders", element: <OrdersPage /> },
+      { path: "/profile", element: <ProfilePage /> },
     ],
   },
   { path: "/logout", element: <Logout /> },
