@@ -6,8 +6,6 @@ import { jwtDecode } from "jwt-decode";
 const TOKEN_KEY = "token";
 const API_ENDPOINT = `${BASE_URL}/api/auth`;
 
-axios.defaults.headers.common["x-auth-token"] = getJwt();
-
 async function login(user: UserLogin) {
   const { data: token } = await axios.post(API_ENDPOINT, user);
   localStorage.setItem(TOKEN_KEY, token);

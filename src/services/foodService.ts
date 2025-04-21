@@ -1,5 +1,6 @@
 import { Food } from "@/types";
 import { BASE_URL } from "@config";
+import { auth } from "@services";
 import axios from "axios";
 
 interface FoodFormData {
@@ -23,15 +24,38 @@ export function getFoods() {
 }
 
 export function getFood(id: string) {
-  return axios.get<Food>(foodUrl(id));
+  const token = auth.getJwt();
+  return axios.get<Food>(foodUrl(id), {
+    headers: {
+      "x-auth-token": token,
+    },
+  });
 }
 
 export function saveFood(food: FoodFormData) {
-  if (food.id) return axios.put<Food>(foodUrl(food.id), food);
+  const token = auth.getJwt();
 
-  return axios.post<Food>(foodUrl(), food);
+  if (food.id) {
+    return axios.put<Food>(foodUrl(food.id), food, {
+      headers: {
+        "x-auth-token": token,
+      },
+    });
+  }
+
+  return axios.post<Food>(foodUrl(), food, {
+    headers: {
+      "x-auth-token": token,
+    },
+  });
 }
 
 export function deleteFood(id: string) {
-  return axios.delete<Food>(foodUrl(id));
+  const token = auth.getJwt();
+
+  return axios.delete<Food>(foodUrl(id), {
+    headers: {
+      "x-auth-token": token,
+    },
+  });
 }
