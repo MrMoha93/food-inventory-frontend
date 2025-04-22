@@ -16,12 +16,12 @@ const schema = z.object({
   categoryId: z.string().min(1, { message: "You must select a category" }),
   numberInStock: z
     .number({ invalid_type_error: "Stock must be a number" })
-    .min(1, { message: "Stock cannot be higher than 1" })
+    .min(1, { message: "Stock must be at least 1" })
     .max(100, { message: "Stock cannot be higher than 100" }),
   price: z
     .number()
-    .min(1, { message: "Price cannot be higher than 1" })
-    .max(100, { message: "Price cannot be higher than 20" }),
+    .min(1, { message: "Price must be at least 1" })
+    .max(100, { message: "Price cannot be higher than 100" }),
   images: z
     .instanceof(FileList)
     .refine(
