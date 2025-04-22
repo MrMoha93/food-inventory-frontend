@@ -90,7 +90,7 @@ function FoodsPage() {
       </div>
       <div className="col">
         {user && (
-          <Link to="/foods/new" className="btn btn-primary mb-2">
+          <Link to="/foods/new" className="btn btn-primary mt-2 mb-2">
             New Food
           </Link>
         )}

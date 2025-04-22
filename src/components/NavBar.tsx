@@ -15,7 +15,7 @@ function NavBar() {
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">
         <Link className="navbar-brand" to="/foods">
-          Khalilis Foods
+          Food Inventory
         </Link>
         <button
           className="navbar-toggler"

@@ -15,7 +15,7 @@ function ListGroup<T extends Item>({
   onItemSelect,
 }: Props<T>) {
   return (
-    <ul className="list-group ">
+    <ul className="list-group mt-2 ">
       {items.map((item) => (
         <li
           key={item.id}
